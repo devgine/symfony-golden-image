@@ -6,8 +6,8 @@ on:
     #  - main
     paths:
       - Dockerfile
-      - .docker/
-      - .github/workflows/
+      - .docker/**
+      - .github/workflows/**
 
 permissions:
   contents: 'read'
