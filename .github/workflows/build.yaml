@@ -2,12 +2,12 @@ name: "Build"
 
 on:
   push:
-    branches:
-      - main
+    #branches:
+    #  - main
     paths:
       - Dockerfile
-      - .docker/
-      - .github/workflows/
+      - .docker/**
+      - .github/workflows/**
 
 permissions:
   contents: 'read'
@@ -21,30 +21,17 @@ jobs:
         php: ['7.2', '7.3', '7.4', '8.0', '8.1', '8.2']
         composer: ['2']
         symfony: ['5.4']
-        webapp: [true, false]
         latest: [false]
         include:
           - php: 8.1
             symfony: 6.2
-            webapp: true
-            composer: 2
-            latest: false
-          - php: 8.1
-            symfony: 6.2
-            webapp: false
             composer: 2
             latest: false
           - php: 8.2
             symfony: 6.2
-            webapp: true
             composer: 2
             latest: true
-          - php: 8.2
-            symfony: 6.2
-            webapp: false
-            composer: 2
-            latest: true
-    name: "SF v${{ matrix.symfony }}${{ matrix.webapp && '-webapp' || '' }} PHP ${{ matrix.php }} package"
+    name: "SF v${{ matrix.symfony }} PHP ${{ matrix.php }} package"
     runs-on: ubuntu-latest
 
     steps:
@@ -59,11 +46,10 @@ jobs:
           password: ${{ secrets.GH_REPOSITORY_TOKEN }}
 
       - name: Process builder
-        if: ${{ github.ref == 'refs/heads/main' }}
         shell: bash
         run: |
           echo "build_date=$(date -u +"%Y-%m-%dT%H:%M:%SZ")" >> $GITHUB_ENV
-          echo "image_tag=v${{ matrix.symfony }}${{ matrix.webapp && '-webapp' || '' }}-php${{ matrix.php }}-alpine" >> $GITHUB_ENV
+          echo "image_tag=v${{ matrix.symfony }}-php${{ matrix.php }}-alpine" >> $GITHUB_ENV
 
       - name: Set up Depot CLI
         uses: 'depot/setup-action@v1'
@@ -79,13 +65,12 @@ jobs:
           context: .
           tags: |
             ghcr.io/devgine/symfony-golden:${{ env.image_tag }}
-            ${{ matrix.latest && 'ghcr.io/devgine/symfony-golden:latest' || ''}}${{ matrix.webapp && '-webapp' || '' }}
+            ${{ matrix.latest && 'ghcr.io/devgine/symfony-golden:latest' || ''}}
           build-args: |
             VCS_REF=${{ github.sha }}
             BUILD_DATE=${{ env.build_date }}
             BUILD_VERSION=${{ env.image_tag }}
             SYMFONY_VERSION=${{ matrix.symfony }}
-            SYMFONY_PACK=${{ matrix.webapp && '--webapp' || '' }}
             PHP_VERSION=${{ matrix.php }}
             COMPOSER_VERSION=${{ matrix.composer }}
             IMAGE_TAG=ghcr.io/devgine/symfony-golden:${{ env.image_tag }}
@@ -97,43 +82,34 @@ jobs:
         php: ['7.2', '7.3', '7.4', '8.0', '8.1', '8.2']
         composer: ['2']
         symfony: ['5.4', ]
-        webapp: [true, false]
         include:
           - php: 8.1
             symfony: 6.2
-            webapp: true
             composer: 2
           - php: 8.1
             symfony: 6.2
-            webapp: false
             composer: 2
           - php: 8.2
             symfony: 6.2
-            webapp: true
             composer: 2
           - php: 8.2
             symfony: 6.2
-            webapp: false
             composer: 2
     needs: packaging
     runs-on: ubuntu-latest
-    name: "SF v${{ matrix.symfony }}${{ matrix.webapp && '-webapp' || '' }} PHP ${{ matrix.php }} check"
+    name: "SF v${{ matrix.symfony }} PHP ${{ matrix.php }} check"
     container:
-      image: ghcr.io/devgine/symfony-golden:v${{ matrix.symfony }}${{ matrix.webapp && '-webapp' || '' }}-php${{ matrix.php }}-alpine
+      image: ghcr.io/devgine/symfony-golden:v${{ matrix.symfony }}-php${{ matrix.php }}-alpine
     steps:
       - name: OS release
         run: cat /etc/os-release
 
-      - name: Composer
+      - name: Composer version
         run: composer --version
 
-      - name: PHP
+      - name: PHP version
         run: php --version
 
       - name: Symfony version
         working-directory: /var/www/symfony
         run: php bin/console -V
-
-      - name: Symfony source code tree
-        working-directory: /var/www/symfony
-        run: tree src/

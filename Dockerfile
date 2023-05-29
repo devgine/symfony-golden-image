@@ -4,11 +4,12 @@ ARG COMPOSER_VERSION=2
 FROM composer:${COMPOSER_VERSION} as composer
 FROM php:${PHP_VERSION}-fpm-alpine
 
+ARG PHP_VERSION=8
+ENV PHP_VERSION $PHP_VERSION
+ARG COMPOSER_VERSION=2
+ENV COMPOSER_VERSION $COMPOSER_VERSION
 ARG SYMFONY_VERSION=6.2
 ENV SYMFONY_VERSION $SYMFONY_VERSION
-
-ARG SYMFONY_PACK
-ENV SYMFONY_PACK $SYMFONY_PACK
 
 COPY --from=composer /usr/bin/composer /usr/bin/composer
 
@@ -34,7 +35,7 @@ HEALTHCHECK --interval=5s --timeout=3s --retries=3 CMD symfony check:req || exit
 
 WORKDIR /var/www
 
-RUN symfony new symfony --no-git --version="$SYMFONY_VERSION" $SYMFONY_PACK
+RUN symfony new symfony --no-git --version="$SYMFONY_VERSION"
 
 WORKDIR /var/www/symfony
 
@@ -49,12 +50,23 @@ ARG IMAGE_TAG=ghcr.io/devgine/symfony-golden:latest
 
 ## LABELS
 LABEL maintainer="yosribahri@gmail.com"
+LABEL org.opencontainers.image.title="Symfony v$SYMFONY_VERSION PHP-fpm $PHP_VERSION docker image"
+LABEL org.opencontainers.image.description="This is a docker image based on official alpine image, PHP-fpm \
+$PHP_VERSION and composer v$COMPOSER_VERSION. This image contains the symfony v$SYMFONY_VERSION installed with \
+synfony-cli and all extensions required by the framework."
 LABEL org.opencontainers.image.source="https://github.com/devgine/symfony-golden-image"
-LABEL org.opencontainers.image.description="Symfony golden image"
+LABEL org.opencontainers.image.licenses=MIT
+LABEL org.opencontainers.image.created=$BUILD_DATE
+LABEL org.opencontainers.image.url="https://github.com/devgine/symfony-golden-image"
+LABEL org.opencontainers.image.version=$BUILD_VERSION
+LABEL org.opencontainers.image.revision=$VCS_REF
+LABEL org.opencontainers.image.vendor="devgine"
 LABEL org.label-schema.schema-version="1.0"
 LABEL org.label-schema.build-date=$BUILD_DATE
 LABEL org.label-schema.name="devgine/symfony-golden"
-LABEL org.label-schema.description="Symfony golden image"
+LABEL org.label-schema.description="This is a docker image based on official alpine image, PHP-fpm \
+$PHP_VERSION and composer v$COMPOSER_VERSION. This image contains the symfony v$SYMFONY_VERSION installed with \
+synfony-cli and all extensions required by the framework."
 LABEL org.label-schema.url="https://github.com/devgine/symfony-golden-image"
 LABEL org.label-schema.vcs-url="https://github.com/devgine/symfony-golden-image"
 LABEL org.label-schema.vcs-ref=$VCS_REF
