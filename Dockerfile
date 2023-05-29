@@ -7,9 +7,6 @@ FROM php:${PHP_VERSION}-fpm-alpine
 ARG SYMFONY_VERSION=6.2
 ENV SYMFONY_VERSION $SYMFONY_VERSION
 
-ARG SYMFONY_PACK
-ENV SYMFONY_PACK $SYMFONY_PACK
-
 COPY --from=composer /usr/bin/composer /usr/bin/composer
 
 ### SYMFONY REQUIREMENT
@@ -34,7 +31,7 @@ HEALTHCHECK --interval=5s --timeout=3s --retries=3 CMD symfony check:req || exit
 
 WORKDIR /var/www
 
-RUN symfony new symfony --no-git --version="$SYMFONY_VERSION" $SYMFONY_PACK
+RUN symfony new symfony --no-git --version="$SYMFONY_VERSION"
 
 WORKDIR /var/www/symfony
 
