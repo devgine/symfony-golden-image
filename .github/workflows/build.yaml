@@ -7,7 +7,7 @@ on:
     paths:
       - Dockerfile
       - .docker/**
-      - .github/workflows/**
+      - .github/workflows/build.yaml
 
 permissions:
   contents: 'read'
@@ -81,15 +81,9 @@ jobs:
       matrix:
         php: ['7.2', '7.3', '7.4', '8.0', '8.1', '8.2']
         composer: ['2']
-        symfony: ['5.4', ]
+        symfony: ['5.4']
         include:
           - php: 8.1
-            symfony: 6.2
-            composer: 2
-          - php: 8.1
-            symfony: 6.2
-            composer: 2
-          - php: 8.2
             symfony: 6.2
             composer: 2
           - php: 8.2
