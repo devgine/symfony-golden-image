@@ -53,7 +53,7 @@ LABEL maintainer="yosribahri@gmail.com"
 LABEL org.opencontainers.image.title="Symfony v$SYMFONY_VERSION PHP-fpm $PHP_VERSION docker image"
 LABEL org.opencontainers.image.description="This is a docker image based on official alpine image, PHP-fpm \
 $PHP_VERSION and composer v$COMPOSER_VERSION. This image contains the symfony v$SYMFONY_VERSION installed with \
-synfony-cli and all extensions required by the framework."
+symfony-cli and all extensions required by the framework."
 LABEL org.opencontainers.image.source="https://github.com/devgine/symfony-golden-image"
 LABEL org.opencontainers.image.licenses=MIT
 LABEL org.opencontainers.image.created=$BUILD_DATE
@@ -66,7 +66,7 @@ LABEL org.label-schema.build-date=$BUILD_DATE
 LABEL org.label-schema.name="devgine/symfony-golden"
 LABEL org.label-schema.description="This is a docker image based on official alpine image, PHP-fpm \
 $PHP_VERSION and composer v$COMPOSER_VERSION. This image contains the symfony v$SYMFONY_VERSION installed with \
-synfony-cli and all extensions required by the framework."
+symfony-cli and all extensions required by the framework."
 LABEL org.label-schema.url="https://github.com/devgine/symfony-golden-image"
 LABEL org.label-schema.vcs-url="https://github.com/devgine/symfony-golden-image"
 LABEL org.label-schema.vcs-ref=$VCS_REF
