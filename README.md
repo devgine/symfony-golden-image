@@ -1,7 +1,6 @@
 # symfony-cli-docker-image
 
 [![Build](https://github.com/devgine/symfony-golden-image/actions/workflows/build.yaml/badge.svg?branch=main)](https://github.com/devgine/symfony-golden-image/actions/workflows/build.yaml)
-[![GitHub](https://img.shields.io/github/license/devgine/symfony-golden-image)](https://github.com/devgine/symfony-golden-image/blob/main/LICENSE)
 ![GitHub top language](https://img.shields.io/github/languages/top/devgine/symfony-golden-image)
 [![Packages retention policy](https://github.com/devgine/symfony-golden-image/actions/workflows/packages-retention-policy.yaml/badge.svg?branch=main)](https://github.com/devgine/symfony-golden-image/actions/workflows/packages-retention-policy.yaml)
 
