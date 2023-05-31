@@ -25,11 +25,14 @@ List of docker images available by Symfony and PHP versions:
         </tr>
         <tr>
             <td>8.2</td>
-            <td><i>Coming soon</i></td>
+            <td>
+                <code>ghcr.io/devgine/symfony-golden:latest</code><br />
+                <code>ghcr.io/devgine/symfony-golden:v6.3-php8.2-alpine</code>
+            </td>
         </tr>
         <tr>
             <td>8.1</td>
-            <td><i>Coming soon</i></td>
+            <td><code>ghcr.io/devgine/symfony-golden:v6.3-php8.1-alpine</code></td>
         </tr>
         <tr>
             <td rowspan="3">6.2</td>
@@ -94,8 +97,8 @@ List of docker images available by Symfony and PHP versions:
 ```shell
 docker run --rm -ti -p 8000:8000 -v LOCAL_PROJETC_DIR:/var/www/symfony ghcr.io/devgine/symfony-golden:latest sh
 ```
-You can change latest with specific tag<br>
-[Available versions](https://github.com/devgine/composer-php/pkgs/container/composer-php/versions)
+> You can change latest with specific tag<br>
+> [Available versions](https://github.com/devgine/symfony-golden-image/pkgs/container/symfony-golden/versions)
 
 After the built-in server has been started, visit http://localhost:8000 in your web browser.
 
