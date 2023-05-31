@@ -19,9 +19,19 @@ List of docker images available by Symfony and PHP versions:
     </thead>
     <tbody>
         <tr>
+            <td>7.0</td>
+            <td>8</td>
+            <td><i>Waiting for the version release</i></td>
+        </tr>
+        <tr>
+            <td>6.4</td>
+            <td>8</td>
+            <td><i>Waiting for the version release</i></td>
+        </tr>
+        <tr>
             <td rowspan="3">6.3</td>
             <td>8.3</td>
-            <td><i>Coming soon</i></td>
+            <td><i>Waiting for the version release</i></td>
         </tr>
         <tr>
             <td>8.2</td>
@@ -37,7 +47,7 @@ List of docker images available by Symfony and PHP versions:
         <tr>
             <td rowspan="3">6.2</td>
             <td>8.3</td>
-            <td><i>Coming soon</i></td>
+            <td><i>Waiting for the version release</i></td>
         </tr>
         <tr>
             <td>8.2</td>
@@ -50,7 +60,7 @@ List of docker images available by Symfony and PHP versions:
         <tr>
             <td rowspan="3">6.1</td>
             <td>8.3</td>
-            <td><i>Coming soon</i></td>
+            <td><i>Waiting for the version release</i></td>
         </tr>
         <tr>
             <td>8.2</td>
@@ -63,7 +73,7 @@ List of docker images available by Symfony and PHP versions:
         <tr>
             <td rowspan="7">5.4</td>
             <td>8.3</td>
-            <td><i>Coming soon</i></td>
+            <td><i>Waiting for the version release</i></td>
         </tr>
         <tr>
             <td>8.2</td>
@@ -124,3 +134,8 @@ services:
     volumes:
       - '.:/var/www/symfony'
 ```
+
+## References
+
+* [Symfony releases](https://symfony.com/releases)
+* [PHP releases](https://www.php.net/supported-versions.php)
