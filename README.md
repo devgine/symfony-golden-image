@@ -19,21 +19,31 @@ List of docker images available by Symfony and PHP versions:
     </thead>
     <tbody>
         <tr>
-            <td>7.0</td>
-            <td>8</td>
-            <td><i>Waiting for the version release</i></td>
+            <td rowspan="2">7.0</td>
+            <td>8.2</td>
+            <td>
+                <code>ghcr.io/devgine/symfony-golden:latest</code><br />
+                <code>ghcr.io/devgine/symfony-golden:v7.0-php8.2-alpine</code>
+            </td>
         </tr>
         <tr>
-            <td>6.4</td>
-            <td>8</td>
-            <td><i>Waiting for the version release</i></td>
+            <td>8.1</td>
+            <td><code>ghcr.io/devgine/symfony-golden:v7.0-php8.1-alpine</code></td>
         </tr>
         <tr>
-            <td rowspan="3">6.3</td>
-            <td>8.3</td>
-            <td><i>Waiting for the version release</i></td>
+            <td rowspan="2">6.4</td>
+            <td>8.2</td>
+            <td>
+                <code>ghcr.io/devgine/symfony-golden:latest</code><br />
+                <code>ghcr.io/devgine/symfony-golden:v6.4-php8.2-alpine</code>
+            </td>
         </tr>
         <tr>
+            <td>8.1</td>
+            <td><code>ghcr.io/devgine/symfony-golden:v6.4-php8.1-alpine</code></td>
+        </tr>
+        <tr>
+            <td rowspan="2">6.3</td>
             <td>8.2</td>
             <td>
                 <code>ghcr.io/devgine/symfony-golden:latest</code><br />
@@ -45,11 +55,7 @@ List of docker images available by Symfony and PHP versions:
             <td><code>ghcr.io/devgine/symfony-golden:v6.3-php8.1-alpine</code></td>
         </tr>
         <tr>
-            <td rowspan="3">6.2</td>
-            <td>8.3</td>
-            <td><i>Waiting for the version release</i></td>
-        </tr>
-        <tr>
+            <td rowspan="2">6.2</td>
             <td>8.2</td>
             <td><code>ghcr.io/devgine/symfony-golden:v6.2-php8.2-alpine</code></td>
         </tr>
@@ -58,11 +64,7 @@ List of docker images available by Symfony and PHP versions:
             <td><code>ghcr.io/devgine/symfony-golden:v6.2-php8.1-alpine</code></td>
         </tr>
         <tr>
-            <td rowspan="3">6.1</td>
-            <td>8.3</td>
-            <td><i>Waiting for the version release</i></td>
-        </tr>
-        <tr>
+            <td rowspan="2">6.1</td>
             <td>8.2</td>
             <td><code>ghcr.io/devgine/symfony-golden:v6.1-php8.2-alpine</code></td>
         </tr>
@@ -71,11 +73,7 @@ List of docker images available by Symfony and PHP versions:
             <td><code>ghcr.io/devgine/symfony-golden:v6.1-php8.1-alpine</code></td>
         </tr>
         <tr>
-            <td rowspan="7">5.4</td>
-            <td>8.3</td>
-            <td><i>Waiting for the version release</i></td>
-        </tr>
-        <tr>
+            <td rowspan="6">5.4</td>
             <td>8.2</td>
             <td><code>ghcr.io/devgine/symfony-golden:v5.4-php8.2-alpine</code></td>
         </tr>
@@ -107,10 +105,11 @@ List of docker images available by Symfony and PHP versions:
 ```shell
 docker run --rm -ti -p 8000:8000 -v LOCAL_PROJETC_DIR:/var/www/symfony ghcr.io/devgine/symfony-golden:latest sh
 ```
-> You can change latest with specific tag<br>
+> You can change latest by a specific tag<br>
 > [Available versions](https://github.com/devgine/symfony-golden-image/pkgs/container/symfony-golden/versions)
 
-After the built-in server has been started, visit http://localhost:8000 in your web browser.
+After the built-in, server will be started.<br>
+Visit http://localhost:8000 in your web browser.
 
 ### Use as base image in Dockerfile
 ```dockerfile
@@ -133,6 +132,13 @@ services:
       - 8000:8000
     volumes:
       - '.:/var/www/symfony'
+```
+Be careful, if you bind the symfony project as a volume the local directory will erase the symfony project.<br>
+To fix that, after your service running you can launch the below command inside the container.
+```bash
+new-symfony $DIRECTORY
+# example
+new-symfony /var/www
 ```
 
 ## References

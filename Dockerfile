@@ -1,14 +1,12 @@
-ARG PHP_VERSION=8
+ARG PHP_VERSION=8.2
 ARG COMPOSER_VERSION=2
 
 FROM composer:${COMPOSER_VERSION} as composer
 FROM php:${PHP_VERSION}-fpm-alpine
 
-ARG PHP_VERSION=8
 ENV PHP_VERSION $PHP_VERSION
-ARG COMPOSER_VERSION=2
 ENV COMPOSER_VERSION $COMPOSER_VERSION
-ARG SYMFONY_VERSION=6.2
+ARG SYMFONY_VERSION=6.4
 ENV SYMFONY_VERSION $SYMFONY_VERSION
 
 COPY --from=composer /usr/bin/composer /usr/bin/composer
@@ -23,6 +21,9 @@ RUN apk add --no-cache icu-dev \
 COPY .docker/docker-symfony-golden.ini /usr/local/etc/php/conf.d/
 ### END SYMFONY REQUIREMENT
 
+COPY ./.docker/new-symfony.sh /usr/local/bin/new-symfony
+RUN chmod +x /usr/local/bin/new-symfony
+
 ## SYMFONY CLI INSTALL
 RUN apk add --no-cache bash git
 RUN curl -1sLf 'https://dl.cloudsmith.io/public/symfony/stable/setup.alpine.sh' | bash
@@ -33,9 +34,7 @@ RUN apk add symfony-cli
 HEALTHCHECK --interval=5s --timeout=3s --retries=3 CMD symfony check:req || exit 1
 # END HEALTHCHECK
 
-WORKDIR /var/www
-
-RUN symfony new symfony --no-git --version="$SYMFONY_VERSION"
+RUN new-symfony "/var/www"
 
 WORKDIR /var/www/symfony
 
