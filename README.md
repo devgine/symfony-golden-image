@@ -19,16 +19,12 @@ List of docker images available by Symfony and PHP versions:
     </thead>
     <tbody>
         <tr>
-            <td rowspan="2">7.0</td>
+            <td>7.0</td>
             <td>8.2</td>
             <td>
                 <code>ghcr.io/devgine/symfony-golden:latest</code><br />
                 <code>ghcr.io/devgine/symfony-golden:v7.0-php8.2-alpine</code>
             </td>
-        </tr>
-        <tr>
-            <td>8.1</td>
-            <td><code>ghcr.io/devgine/symfony-golden:v7.0-php8.1-alpine</code></td>
         </tr>
         <tr>
             <td rowspan="2">6.4</td>
