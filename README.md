@@ -6,8 +6,8 @@
 
 ## About
 This repository is a docker image based on official php, composer and alpine docker images.<br>
-This image contains the symfony framework installed with symfony-cli and all extensions required by the framework.<br>
-List of docker images available by Symfony and PHP versions:
+This image contains symfony framework installed with all its required extensions.<br>
+Below is the list of all the available images by Symfony and PHP versions:
 
 <table>
     <thead>
@@ -99,7 +99,7 @@ List of docker images available by Symfony and PHP versions:
 ## Usage
 ### Install from the command line
 ```shell
-docker run --rm -ti -p 8000:8000 -v LOCAL_PROJETC_DIR:/var/www/symfony ghcr.io/devgine/symfony-golden:latest sh
+docker run --rm -ti -p 8000:8000 ghcr.io/devgine/symfony-golden:latest sh
 ```
 > You can change latest by a specific tag<br>
 > [Available versions](https://github.com/devgine/symfony-golden-image/pkgs/container/symfony-golden/versions)
@@ -126,10 +126,8 @@ services:
     image: ghcr.io/devgine/symfony-golden:latest
     ports:
       - 8000:8000
-    volumes:
-      - '.:/var/www/symfony'
 ```
-Be careful, if you bind the symfony project as a volume the local directory will erase the symfony project.<br>
+Be careful, if you bind the symfony project as a volume, it will be erased by the local directory.<br>
 To fix that, after your service running you can launch the below command inside the container.
 ```bash
 new-symfony $DIRECTORY
