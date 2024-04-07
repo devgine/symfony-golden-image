@@ -1,8 +1,10 @@
-# symfony-cli-docker-image
+# Symfony docker image
 
 [![Build](https://github.com/devgine/symfony-golden-image/actions/workflows/build.yaml/badge.svg?branch=main)](https://github.com/devgine/symfony-golden-image/actions/workflows/build.yaml)
 ![GitHub top language](https://img.shields.io/github/languages/top/devgine/symfony-golden-image)
 [![Packages retention policy](https://github.com/devgine/symfony-golden-image/actions/workflows/packages-retention-policy.yaml/badge.svg?branch=main)](https://github.com/devgine/symfony-golden-image/actions/workflows/packages-retention-policy.yaml)
+
+![cover.png](.readme/images/cover.png)
 
 ## About
 This repository is a docker image based on official php, composer and alpine docker images.<br>
@@ -19,7 +21,14 @@ Below is the list of all the available images by Symfony and PHP versions:
     </thead>
     <tbody>
         <tr>
-            <td>7.0</td>
+            <td rowspan="2">7.0</td>
+            <td>8.3</td>
+            <td>
+                <code>ghcr.io/devgine/symfony-golden:latest</code><br />
+                <code>ghcr.io/devgine/symfony-golden:v7.0-php8.3-alpine</code>
+            </td>
+        </tr>
+        <tr>
             <td>8.2</td>
             <td>
                 <code>ghcr.io/devgine/symfony-golden:latest</code><br />
@@ -27,10 +36,15 @@ Below is the list of all the available images by Symfony and PHP versions:
             </td>
         </tr>
         <tr>
-            <td rowspan="2">6.4</td>
+            <td rowspan="3">6.4</td>
+            <td>8.3</td>
+            <td>
+                <code>ghcr.io/devgine/symfony-golden:v6.4-php8.3-alpine</code>
+            </td>
+        </tr>
+        <tr>
             <td>8.2</td>
             <td>
-                <code>ghcr.io/devgine/symfony-golden:latest</code><br />
                 <code>ghcr.io/devgine/symfony-golden:v6.4-php8.2-alpine</code>
             </td>
         </tr>
@@ -39,10 +53,15 @@ Below is the list of all the available images by Symfony and PHP versions:
             <td><code>ghcr.io/devgine/symfony-golden:v6.4-php8.1-alpine</code></td>
         </tr>
         <tr>
-            <td rowspan="2">6.3</td>
+            <td rowspan="3">6.3</td>
+            <td>8.3</td>
+            <td>
+                <code>ghcr.io/devgine/symfony-golden:v6.3-php8.3-alpine</code>
+            </td>
+        </tr>
+        <tr>
             <td>8.2</td>
             <td>
-                <code>ghcr.io/devgine/symfony-golden:latest</code><br />
                 <code>ghcr.io/devgine/symfony-golden:v6.3-php8.2-alpine</code>
             </td>
         </tr>
@@ -51,7 +70,11 @@ Below is the list of all the available images by Symfony and PHP versions:
             <td><code>ghcr.io/devgine/symfony-golden:v6.3-php8.1-alpine</code></td>
         </tr>
         <tr>
-            <td rowspan="2">6.2</td>
+            <td rowspan="3">6.2</td>
+            <td>8.3</td>
+            <td><code>ghcr.io/devgine/symfony-golden:v6.2-php8.3-alpine</code></td>
+        </tr>
+        <tr>
             <td>8.2</td>
             <td><code>ghcr.io/devgine/symfony-golden:v6.2-php8.2-alpine</code></td>
         </tr>
@@ -60,7 +83,11 @@ Below is the list of all the available images by Symfony and PHP versions:
             <td><code>ghcr.io/devgine/symfony-golden:v6.2-php8.1-alpine</code></td>
         </tr>
         <tr>
-            <td rowspan="2">6.1</td>
+            <td rowspan="3">6.1</td>
+            <td>8.3</td>
+            <td><code>ghcr.io/devgine/symfony-golden:v6.1-php8.3-alpine</code></td>
+        </tr>
+        <tr>
             <td>8.2</td>
             <td><code>ghcr.io/devgine/symfony-golden:v6.1-php8.2-alpine</code></td>
         </tr>
@@ -69,7 +96,11 @@ Below is the list of all the available images by Symfony and PHP versions:
             <td><code>ghcr.io/devgine/symfony-golden:v6.1-php8.1-alpine</code></td>
         </tr>
         <tr>
-            <td rowspan="6">5.4</td>
+            <td rowspan="7">5.4</td>
+            <td>8.3</td>
+            <td><code>ghcr.io/devgine/symfony-golden:v5.4-php8.3-alpine</code></td>
+        </tr>
+        <tr>
             <td>8.2</td>
             <td><code>ghcr.io/devgine/symfony-golden:v5.4-php8.2-alpine</code></td>
         </tr>
