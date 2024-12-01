@@ -47,6 +47,8 @@ RUN apk add symfony-cli
 HEALTHCHECK --interval=5s --timeout=3s --retries=3 CMD symfony check:req || exit 1
 # END HEALTHCHECK
 
+RUN new-symfony $DOCKER_WORKING_DIRECTORY
+
 EXPOSE 8000
 
 ## Create container user

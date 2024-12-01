@@ -28,7 +28,7 @@ Below is the list of all the available images by Symfony and PHP versions:
             <td rowspan="3">7.2</td>
             <td>8.4</td>
             <td>
-                <code>ghcr.io/devgine/symfony-golden:latest</code>
+                <code>ghcr.io/devgine/symfony-golden:latest</code><br>
                 <code>ghcr.io/devgine/symfony-golden:v7.2-php8.4-alpine</code>
             </td>
         </tr>
