@@ -1,28 +1,41 @@
-ARG PHP_VERSION=8.2
+ARG PHP_VERSION=8.4
 ARG COMPOSER_VERSION=2.5
 
 FROM composer:${COMPOSER_VERSION} as composer
 FROM php:${PHP_VERSION}-fpm-alpine
 
-ENV PHP_VERSION $PHP_VERSION
-ENV COMPOSER_VERSION $COMPOSER_VERSION
-ARG SYMFONY_VERSION=6.4
-ENV SYMFONY_VERSION $SYMFONY_VERSION
+ARG SG_SERVER_ENABLED=true
+ENV SG_SERVER_ENABLED=$SG_SERVER_ENABLED
+
+ENV PHP_VERSION=$PHP_VERSION
+ENV COMPOSER_VERSION=$COMPOSER_VERSION
+ARG SYMFONY_VERSION=7.2
+ENV SYMFONY_VERSION=$SYMFONY_VERSION
+ARG SFUSER=symfony
+ENV SFUSER=$SFUSER
+ARG SYMFONY_BUILD_PROJECT=/home/$SFUSER/build
+ENV SYMFONY_BUILD_PROJECT=$SYMFONY_BUILD_PROJECT
+ARG SYMFONY_PROJECT_DIRECTORY_NAME=symfony
+ENV SYMFONY_PROJECT_DIRECTORY_NAME=$SYMFONY_PROJECT_DIRECTORY_NAME
+ARG DOCKER_WORKING_DIRECTORY=/var/www
+ENV DOCKER_WORKING_DIRECTORY=$DOCKER_WORKING_DIRECTORY
 
 COPY --from=composer /usr/bin/composer /usr/bin/composer
 
 ### SYMFONY REQUIREMENT
-RUN apk add --no-cache icu-dev \
+RUN apk add --no-cache icu-dev acl \
   && docker-php-ext-install intl \
   && docker-php-ext-enable intl \
   && docker-php-ext-install opcache \
   && docker-php-ext-enable opcache
 
-COPY .docker/docker-symfony-golden.ini /usr/local/etc/php/conf.d/
+COPY .docker/docker-symfony.ini /usr/local/etc/php/conf.d/
 ### END SYMFONY REQUIREMENT
 
 COPY ./.docker/new-symfony.sh /usr/local/bin/new-symfony
 RUN chmod +x /usr/local/bin/new-symfony
+COPY ./.docker/docker-symfony-entrypoint.sh /usr/local/bin/docker-symfony-entrypoint
+RUN chmod +x /usr/local/bin/docker-symfony-entrypoint
 
 ## SYMFONY CLI INSTALL
 RUN apk add --no-cache bash git
@@ -34,13 +47,28 @@ RUN apk add symfony-cli
 HEALTHCHECK --interval=5s --timeout=3s --retries=3 CMD symfony check:req || exit 1
 # END HEALTHCHECK
 
-RUN new-symfony "/var/www"
-
-WORKDIR /var/www/symfony
-
 EXPOSE 8000
 
-CMD ["symfony", "server:start"]
+## Create container user
+ARG UID=1001
+ENV UID $UID
+ARG GID=1001
+ENV GID $GID
+
+RUN apk add --no-cache sudo
+RUN addgroup --system --gid $GID $SFUSER
+RUN echo "$SFUSER ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/$SFUSER
+RUN chmod 0440 /etc/sudoers.d/$SFUSER
+RUN adduser --system --uid $UID --ingroup $SFUSER $SFUSER
+
+USER $SFUSER
+
+RUN new-symfony $SYMFONY_BUILD_PROJECT
+
+WORKDIR $DOCKER_WORKING_DIRECTORY/$SYMFONY_PROJECT_DIRECTORY_NAME
+
+ENTRYPOINT ["docker-symfony-entrypoint"]
+CMD ["php-fpm", "-F"]
 
 ARG BUILD_DATE
 ARG VCS_REF
@@ -74,4 +102,4 @@ LABEL org.label-schema.version=$BUILD_VERSION
 LABEL org.label-schema.docker.cmd="docker run --rm -ti -v PROJECT_DIR:/var/www/symfony $IMAGE_TAG sh"
 
 ## ClEAN
-RUN rm -rf /tmp/* /var/cache/apk/* /var/tmp/*
+RUN sudo rm -rf /tmp/* /var/cache/apk/* /var/tmp/*

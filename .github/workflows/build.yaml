@@ -18,15 +18,31 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        php: ['8.3']
+        php: ['8.4']
         composer: ['2.5']
-        symfony: ['5.4', '6.1', '6.2', '6.3', '6.4']
+        symfony: ['6.4', '7.0', '7.1']
         latest: [false]
         include:
-          - php: 8.3
-            symfony: '7.0'
+          - php: 8.4
+            symfony: '7.2'
             composer: 2.5
             latest: true
+          - php: 8.3
+            symfony: '7.2'
+            composer: 2.5
+            latest: false
+          - php: 8.2
+            symfony: '7.2'
+            composer: 2.5
+            latest: false
+          - php: 8.3
+            symfony: '7.1'
+            composer: 2.5
+            latest: false
+          - php: 8.2
+            symfony: '7.1'
+            composer: 2.5
+            latest: false
     name: "[Package] SF v${{ matrix.symfony }} PHP ${{ matrix.php }}"
     runs-on: ubuntu-latest
 
@@ -75,9 +91,9 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        php: ['8.3']
+        php: ['8.3', '8.4']
         composer: ['2.5']
-        symfony: ['5.4', '6.1', '6.2', '6.3', '6.4', '7.0']
+        symfony: ['6.4', '7.0', '7.1', '7.2']
     needs: packaging
     runs-on: ubuntu-latest
     name: "[Run] SF v${{ matrix.symfony }} PHP ${{ matrix.php }}"
