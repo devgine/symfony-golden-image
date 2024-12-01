@@ -105,83 +105,14 @@ Below is the list of all the available images by Symfony and PHP versions:
             <td>8.1</td>
             <td><code>ghcr.io/devgine/symfony-golden:v6.4-php8.1-alpine</code></td>
         </tr>
-        <tr>
-            <td rowspan="3">6.3</td>
-            <td>8.3</td>
-            <td>
-                <code>ghcr.io/devgine/symfony-golden:v6.3-php8.3-alpine</code>
-            </td>
-        </tr>
-        <tr>
-            <td>8.2</td>
-            <td>
-                <code>ghcr.io/devgine/symfony-golden:v6.3-php8.2-alpine</code>
-            </td>
-        </tr>
-        <tr>
-            <td>8.1</td>
-            <td><code>ghcr.io/devgine/symfony-golden:v6.3-php8.1-alpine</code></td>
-        </tr>
-        <tr>
-            <td rowspan="3">6.2</td>
-            <td>8.3</td>
-            <td><code>ghcr.io/devgine/symfony-golden:v6.2-php8.3-alpine</code></td>
-        </tr>
-        <tr>
-            <td>8.2</td>
-            <td><code>ghcr.io/devgine/symfony-golden:v6.2-php8.2-alpine</code></td>
-        </tr>
-        <tr>
-            <td>8.1</td>
-            <td><code>ghcr.io/devgine/symfony-golden:v6.2-php8.1-alpine</code></td>
-        </tr>
-        <tr>
-            <td rowspan="3">6.1</td>
-            <td>8.3</td>
-            <td><code>ghcr.io/devgine/symfony-golden:v6.1-php8.3-alpine</code></td>
-        </tr>
-        <tr>
-            <td>8.2</td>
-            <td><code>ghcr.io/devgine/symfony-golden:v6.1-php8.2-alpine</code></td>
-        </tr>
-        <tr>
-            <td>8.1</td>
-            <td><code>ghcr.io/devgine/symfony-golden:v6.1-php8.1-alpine</code></td>
-        </tr>
-        <tr>
-            <td rowspan="7">5.4</td>
-            <td>8.3</td>
-            <td><code>ghcr.io/devgine/symfony-golden:v5.4-php8.3-alpine</code></td>
-        </tr>
-        <tr>
-            <td>8.2</td>
-            <td><code>ghcr.io/devgine/symfony-golden:v5.4-php8.2-alpine</code></td>
-        </tr>
-        <tr>
-            <td>8.1</td>
-            <td><code>ghcr.io/devgine/symfony-golden:v5.4-php8.1-alpine</code></td>
-        </tr>
-        <tr>
-            <td>8.0</td>
-            <td><code>ghcr.io/devgine/symfony-golden:v5.4-php8.0-alpine</code></td>
-        </tr>
-        <tr>
-            <td>7.4</td>
-            <td><code>ghcr.io/devgine/symfony-golden:v5.4-php7.4-alpine</code></td>
-        </tr>
-        <tr>
-            <td>7.3</td>
-            <td><code>ghcr.io/devgine/symfony-golden:v5.4-php7.3-alpine</code></td>
-        </tr>
-        <tr>
-            <td>7.2</td>
-            <td><code>ghcr.io/devgine/symfony-golden:v5.4-php7.2-alpine</code></td>
-        </tr>
     </tbody>
 </table>
 
 ### Environment variables
-TODO
+
+| Variable          | Default | Description                                             |
+|-------------------|---------|---------------------------------------------------------|
+| SG_SERVER_ENABLED | true    | Status of symfony server (to be disabled in production) |
 
 ## Usage
 ### Install from the command line
